@@ -198,6 +198,18 @@ NodeBase::toString() const
     }
     return s.str();
 }
+size_t NodeBase::DFS(){
+    size_t size1 = 0;
+    for(std::size_t i = 0; i < subnodes.size(); i++) {
+        if(subnodes[i] == nullptr){
+            size1 += sizeof(nullptr);
+        }else{
+            size1 += sizeof(subnodes[i]);
+        }
+    }
+    return size1;
+}
+
 
 /*public*/
 void

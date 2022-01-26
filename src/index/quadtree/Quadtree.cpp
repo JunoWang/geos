@@ -161,6 +161,10 @@ Quadtree::toString() const
     std::string ret = root.toString();
     return ret;
 }
+size_t Quadtree::DFS(){
+    size_t size = root.DFS();
+    return size;
+}
 
 } // namespace geos.index.quadtree
 } // namespace geos.index

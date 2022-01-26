@@ -189,6 +189,7 @@ public:
     Quadtree(const Quadtree&) = delete;
     Quadtree& operator=(const Quadtree&) = delete;
 
+    size_t DFS();
 };
 
 } // namespace geos::index::quadtree
