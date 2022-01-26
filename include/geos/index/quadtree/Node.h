@@ -72,6 +72,19 @@ private:
     Node* getSubnode(int index);
 
     std::unique_ptr<Node> createSubnode(int index);
+    std::size_t indexsize(){
+        // stuff in node
+        std::size_t ptr_size = 8;
+        std::size_t env_size = 32;
+        std::size_t coord_size = 16;
+        // stuff in nodebase
+        std::size_t size_of_item = 10; // need to confirm
+        std::size_t item_size = sizeof(items) + size_of_item* items.size();
+        // size of the node
+        std::size_t  size = ptr_size + env_size + coord_size + item_size + sizeof(level);
+        return size;
+
+    }
 
 protected:
 

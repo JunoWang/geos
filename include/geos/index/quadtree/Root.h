@@ -71,6 +71,16 @@ public:
      * Insert an item into the quadtree this is the root of.
      */
     void insert(const geom::Envelope* itemEnv, void* item);
+    std::size_t index_size(){
+        // size of two double(coordinate in root) + 4 ptr 4*8 = 32byte
+        std::size_t size1 = 16 + 32;
+        //size of vector has item
+        size1 = size1 + sizeof(items) + size_of_item* items.size();
+        //size of ptr is 8
+        for(std::size_t i = 0; i<subnodes.size();i++){
+            size1+= subnodes.indexsize();
+        }
+    }
 
 protected:
 
