@@ -74,12 +74,13 @@ public:
     std::size_t index_size(){
         // size of two double(coordinate in root) + 4 ptr 4*8 = 32byte
         std::size_t size1 = 16 + 32;
-        //size of vector has item
-        size1 = size1 + sizeof(items) + size_of_item* items.size();
+        //size of vector has item pointer
+        size1 = size1 +  8 * items.size();
         //size of ptr is 8
         for(std::size_t i = 0; i<subnodes.size();i++){
-            size1+= subnodes.indexsize();
+            size1+= subnodes.index_size();
         }
+        return size1;
     }
 
 protected:
