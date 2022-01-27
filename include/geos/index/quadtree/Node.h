@@ -73,20 +73,6 @@ private:
 
     std::unique_ptr<Node> createSubnode(int index);
 
-    std::size_t index_size(){
-        // stuff in node
-        //unique ptr size + array of ptr
-        std::size_t ptr_size = sizeof(Node);
-        std::size_t env_size = 32;
-        std::size_t coord_size = 16;
-        // stuff in nodebase
-        std::size_t size_of_item = 8; // need to confirm
-        std::size_t item_size =  size_of_item* items.size();
-        // size of the node
-        std::size_t  size = ptr_size + env_size + coord_size + item_size ;
-        return size;
-
-    }
 
 protected:
 
@@ -144,6 +130,22 @@ public:
     void insertNode(std::unique_ptr<Node> node);
 
     std::string toString() const override;
+
+    std::size_t index_size(){
+        // stuff in node
+        //unique ptr size + array of ptr
+        std::size_t ptr_size = sizeof(Node);
+        std::size_t env_size = 32;
+        std::size_t coord_size = 16;
+        // stuff in nodebase
+        std::size_t size_of_item = 8; // need to confirm
+        std::size_t item_size =  size_of_item* items.size();
+        // size of the node
+        std::size_t  size = ptr_size + env_size + coord_size + item_size ;
+        return size;
+
+    }
+
 
 };
 

@@ -105,8 +105,6 @@ public:
 
     bool isPrunable() const;
 
-    size_t DFS();
-
 protected:
 
     /// Actual items are NOT owned by this class

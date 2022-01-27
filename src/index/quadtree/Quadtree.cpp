@@ -161,8 +161,8 @@ Quadtree::toString() const
     std::string ret = root.toString();
     return ret;
 }
-size_t Quadtree::DFS(){
-    size_t size = root.DFS();
+size_t Quadtree::index_size(){
+    size_t size = root.index_size();
     return size;
 }
 
