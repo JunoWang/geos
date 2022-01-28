@@ -19,6 +19,7 @@
 #ifndef GEOS_IDX_QUADTREE_NODE_H
 #define GEOS_IDX_QUADTREE_NODE_H
 
+#include <iostream>
 #include <geos/export.h>
 #include <geos/index/quadtree/NodeBase.h> // for inheritance
 #include <geos/geom/Coordinate.h> // for composition
@@ -135,6 +136,7 @@ public:
         // stuff in node
         //unique ptr size + array of ptr
         std::size_t ptr_size = sizeof(Node);
+        std::cout <<"size of node class" <<sizeof(Node )<< std::endl;
         std::size_t env_size = 32;
         std::size_t coord_size = 16;
         // stuff in nodebase

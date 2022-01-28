@@ -18,7 +18,7 @@
 
 #ifndef GEOS_IDX_QUADTREE_ROOT_H
 #define GEOS_IDX_QUADTREE_ROOT_H
-
+#include <iostream>
 #include <geos/export.h>
 #include <geos/index/quadtree/NodeBase.h> // for inheritance
 #include <geos/geom/Coordinate.h> // for composition
@@ -75,11 +75,16 @@ public:
     std::size_t index_size(){
         // size of two double(coordinate in root) + 4 ptr 4*8 = 32byte
         std::size_t size1 = 16 + 32;
+        std::cout<< "size of root is "<<sizeof(Root) << std::endl;
         //size of vector has item pointer
         size1 = size1 +  8 * items.size();
         //size of ptr is 8
         for(std::size_t i = 0; i<subnodes.size();i++){
-            size1 += subnodes[i]->index_size();
+            if(subnodes[i] == nullptr){
+                size1 += sizeof(nullptr);
+            }else{
+                size1 += subnodes[i]->index_size();
+            }
         }
         return size1;
     }
