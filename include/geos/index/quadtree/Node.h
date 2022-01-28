@@ -136,7 +136,7 @@ public:
         // stuff in node
         //unique ptr size + array of ptr
         std::size_t ptr_size = sizeof(Node);
-        std::cout <<"size of node class" <<sizeof(Node )<< std::endl;
+        std::cout <<"size of node class with sizeof" <<sizeof(Node )<< std::endl;
         std::size_t env_size = 32;
         std::size_t coord_size = 16;
         // stuff in nodebase

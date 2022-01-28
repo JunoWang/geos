@@ -80,6 +80,8 @@ public:
         size1 = size1 +  8 * items.size();
         //size of ptr is 8
         for(std::size_t i = 0; i<subnodes.size();i++){
+            std::cout << "subnode[" << i << "] ";
+
             if(subnodes[i] == nullptr){
                 size1 += sizeof(nullptr);
             }else{

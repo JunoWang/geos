@@ -16,6 +16,9 @@
 #include <geos/io/WKTReader.h>
 #include <geos/util/IllegalArgumentException.h>
 #include <utility.h>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 using namespace geos::index::strtree;
 
@@ -26,6 +29,51 @@ namespace tut {
 
     using group = test_group<test_sirtree_data>;
     using object = group::object;
+    void read_whole_records(std::string filename, std::vector<geos::geom::Geometry *> &geom_vector) {
+
+        std::unique_ptr<geos::geom::PrecisionModel> pm(new geos::geom::PrecisionModel());
+        geos::geom::GeometryFactory::Ptr global_factory = geos::geom::GeometryFactory::create(pm.get(), -1);
+        geos::io::WKTReader wkt_reader(*global_factory);
+
+        int skipped = 0;
+        std::ifstream infile(filename);
+        // read a whole line/row
+        std::string line;
+        while (std::getline(infile, line)) {
+            std::istringstream iss{line}; // construct a string stream from line
+            // line_part:  value of each column of one row
+            // tokens[i] is the value of row[i]
+            if (!line.empty()) {
+                std::string line_part;
+                std::vector<std::string> tokens;
+                while (std::getline(iss, line_part, '\t')) {
+                    tokens.push_back(line_part); // add the line_part to the vector
+                }
+                assert(!tokens[0].empty());
+                assert(tokens[0] != " ");
+                // remove the double quote marks in WKT polygon (WKT form does not have double quotes)
+                tokens[0].erase(std::remove(tokens[0].begin(), tokens[0].end(), '\"'), tokens[0].end());
+//        std::cout << " the polygon WKT from dataset is "<<tokens[0] << std::endl;
+//        Create geos WKT reader and read into geometry vector
+//        Need use get to get the geometry
+                try {
+                    std::unique_ptr<geos::geom::Geometry> geom_a(wkt_reader.read(tokens[0]));
+                    geom_vector.push_back(global_factory->createGeometry(geom_a.get()));
+//            std::cout << geom_a.get()->toString() << std::endl;
+                } catch (geos::io::ParseException exception) {
+                    skipped++;
+                    continue;
+                }
+            } else {
+                skipped++;
+                continue;
+            }
+
+        }
+        assert(!geom_vector.empty());
+        std::cout << filename << " has " << geom_vector.size() << " records" << std::endl;
+        std::cout << filename << " skips " << skipped << " records" << std::endl;
+    }
 
     group test_sirtree_group("geos::index::strtree::SIRtree");
 
@@ -79,6 +127,22 @@ namespace tut {
         std::cout << "quadtree size is" <<  size << " " << std::endl;
 
     }
+    template<>
+    template<>
+    void object::test<3>
+            () {
+        std::string path = "/Users/juno/Desktop/glin_dataset/TIGER_2015_AREAWATER.csv";
+        std::vector<geos::geom::Geometry*> geoms;
+        read_whole_records(path,geoms);
+        geos::index::quadtree::Quadtree quadtree;
+        for (size_t i = 0; i < geoms.size(); i++) {
+            quadtree.insert(geoms[i]->getEnvelopeInternal(), geoms[i]);
+        }
+        std::size_t  size = quadtree.index_size();
+        std::cout << "quadtree with " << " " << path << size << std::endl;
+    }
+
+
 
 /*
 
