@@ -198,18 +198,26 @@ NodeBase::toString() const
     }
     return s.str();
 }
-//size_t NodeBase::DFS(){
-//    size_t size1 = 0;
-//    for(std::size_t i = 0; i < subnodes.size(); i++) {
-//        if(subnodes[i] == nullptr){
-//            size1 += sizeof(nullptr);
-//        }else{
-//            size1 += sizeof(subnodes[i]);
-//        }
-//    }
-//    return size1;
-//}
+    std::size_t NodeBase::index_size(){
+        // size of two double(coordinate in root) + 4 ptr 4*8 = 32byte
+        std::size_t size1 = 16 + 32;
+//        std::cout<< "size of root is "<<sizeof(Root) << std::endl;
+        //size of vector has item pointer
+        size1 = size1 +  8 * items.size();
+        std::cout << "size of item" << items.size() <<std::endl;
+        //size of ptr is 8
+        for(std::size_t i = 0; i<subnodes.size();i++){
+            std::cout << "subnode[" << i << "] ";
 
+            if(subnodes[i] == nullptr){
+                size1 += sizeof(nullptr);
+
+            }else{
+                size1 += subnodes[i]->index_size();
+            }
+        }
+        return size1;
+    }
 
 /*public*/
 void

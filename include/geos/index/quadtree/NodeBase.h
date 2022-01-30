@@ -104,7 +104,7 @@ public:
     bool hasChildren() const;
 
     bool isPrunable() const;
-
+    size_t index_size();
 protected:
 
     /// Actual items are NOT owned by this class
@@ -123,6 +123,7 @@ protected:
     std::array<Node*, 4> subnodes;
 
     virtual bool isSearchMatch(const geom::Envelope& searchEnv) const = 0;
+
 
 };
 

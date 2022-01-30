@@ -143,7 +143,7 @@ public:
         std::size_t size_of_item = 8; // need to confirm
         std::size_t item_size =  size_of_item* items.size();
         // size of the node
-        std::size_t  size = ptr_size + env_size + coord_size + item_size ;
+        std::size_t  size = ptr_size + env_size + coord_size + item_size  + NodeBase::index_size();
         return size;
 
     }
