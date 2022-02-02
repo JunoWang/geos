@@ -90,6 +90,7 @@ public:
 
     virtual void visit(const geom::Envelope* searchEnv, ItemVisitor& visitor);
 
+    virtual std::size_t travers();
     /**
      * Removes a single item from this subtree.
      *
@@ -104,7 +105,7 @@ public:
     bool hasChildren() const;
 
     bool isPrunable() const;
-    size_t index_size();
+
 protected:
 
     /// Actual items are NOT owned by this class
@@ -123,6 +124,7 @@ protected:
     std::array<Node*, 4> subnodes;
 
     virtual bool isSearchMatch(const geom::Envelope& searchEnv) const = 0;
+
 
 
 };

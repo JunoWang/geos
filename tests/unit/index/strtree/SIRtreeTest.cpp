@@ -131,7 +131,7 @@ namespace tut {
     template<>
     void object::test<3>
             () {
-        std::string path = "/Users/juno/Desktop/glin_dataset/TIGER_2015_AREAWATER.csv";
+        std::string path = "/Users/cwang/Desktop/glin_dataset/TIGER_2015_AREAWATER.csv";
         std::vector<geos::geom::Geometry*> geoms;
         read_whole_records(path,geoms);
         geos::index::quadtree::Quadtree quadtree1;

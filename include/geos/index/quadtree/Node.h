@@ -134,17 +134,19 @@ public:
 
     std::size_t index_size(){
         // stuff in node
+        std::cout << "L" << level << " " << std::endl;
         //unique ptr size + array of ptr
-        std::size_t ptr_size = sizeof(Node);
-        std::cout <<"size of node class with sizeof" <<sizeof(Node )<< std::endl;
-        std::size_t env_size = 32;
-        std::size_t coord_size = 16;
-        // stuff in nodebase
-        std::size_t size_of_item = 8; // need to confirm
-        std::size_t item_size =  size_of_item* items.size();
+        std::size_t env_size = sizeof(geos::geom::Envelope);
+        std::size_t coord_size = sizeof(geos::geom::Coordinate);
+        std::size_t node_size = sizeof(Node);
+        std::size_t item_size = sizeof(void *)* items.size();
+        std::size_t  size = 0;
         // size of the node
-        std::size_t  size = ptr_size + env_size + coord_size + item_size  + NodeBase::index_size();
-        return size;
+        if(subnodes.empty()){
+            return size = env_size + coord_size+ node_size+ item_size;
+        }else{
+            return  size =  env_size + coord_size+ node_size+ item_size + NodeBase::travers();
+        }
 
     }
 
