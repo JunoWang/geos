@@ -198,25 +198,15 @@ NodeBase::toString() const
     }
     return s.str();
 }
-    std::size_t NodeBase::travers(){
-        // size of two double(coordinate in root) + 4 ptr 4*8 = 32byte
-        std::size_t size1 = 0;
-//        std::cout<< "size of root is "<<sizeof(Root) << std::endl;
-        //size of vector has item pointer
-//        size1 = size1 + sizeof(void *) * items.size();
-        std::cout << "size of item" << items.size() <<std::endl;
-        //size of ptr is 8
-        std::cout << "subnodes size " <<subnodes.size() << std::endl;
-        for(std::size_t i = 0; i<subnodes.size();i++){
-//            std::cout << "subnode[" << i << "] " << std::endl;
-            if(subnodes[i] == nullptr){
-                size1 += sizeof(nullptr);
-            }else{
-                size1 += subnodes[i]->index_size();
-            }
+std::size_t NodeBase::traverse(){
+    size_t size = 0;
+    for(auto & subnode : subnodes){
+        if(subnode != nullptr){
+            size += subnode->index_size();
         }
-        return size1;
     }
+    return size;
+}
 
 /*public*/
 void

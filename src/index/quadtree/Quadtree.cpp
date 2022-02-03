@@ -162,7 +162,7 @@ Quadtree::toString() const
     return ret;
 }
 size_t Quadtree::index_size(){
-    size_t size = root.travers();
+    size_t size = root.traverse();
     return size;
 }
 

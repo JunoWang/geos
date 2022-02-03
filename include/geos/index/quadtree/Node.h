@@ -133,23 +133,8 @@ public:
     std::string toString() const override;
 
     std::size_t index_size(){
-        // stuff in node
-        std::cout << "L" << level << " " << std::endl;
-        //unique ptr size + array of ptr
-        std::size_t env_size = sizeof(geos::geom::Envelope);
-        std::size_t coord_size = sizeof(geos::geom::Coordinate);
-        std::size_t node_size = sizeof(Node);
-        std::size_t item_size = sizeof(void *)* items.size();
-        std::size_t  size = 0;
-        // size of the node
-        if(subnodes.empty()){
-            return size = env_size + coord_size+ node_size+ item_size;
-        }else{
-            return  size =  env_size + coord_size+ node_size+ item_size + NodeBase::travers();
-        }
-
+        return sizeof(geos::geom::Envelope) + sizeof(Node)+ sizeof(void *) * items.size() + traverse();
     }
-
 
 };
 
