@@ -133,7 +133,7 @@ public:
     std::string toString() const override;
 
     std::size_t index_size(){
-        return sizeof(geos::geom::Envelope) + sizeof(Node)+ sizeof(void *) * items.size() + traverse();
+        return sizeof(geos::geom::Envelope) + sizeof(Node) + traverse();
     }
 
 };
