@@ -16,7 +16,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
-
+#include "re"
 namespace tut {
 test_runner_singleton runner;
 }
