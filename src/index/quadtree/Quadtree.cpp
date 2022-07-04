@@ -166,6 +166,11 @@ size_t Quadtree::index_size(){
     return size;
 }
 
+size_t Quadtree::count_node(){
+    size_t num_of_node = root.traverse_nodes();
+    return num_of_node;
+}
+
 } // namespace geos.index.quadtree
 } // namespace geos.index
 } // namespace geos

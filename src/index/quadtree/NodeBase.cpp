@@ -207,6 +207,15 @@ std::size_t NodeBase::traverse(){
     }
     return size;
 }
+    std::size_t NodeBase::traverse_nodes(){
+        size_t num_of_nodes = 0;
+        for(auto & subnode : subnodes){
+            if(subnode != nullptr){
+               num_of_nodes ++;
+            }
+        }
+        return num_of_nodes;
+    }
 
 /*public*/
 void

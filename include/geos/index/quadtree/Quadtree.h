@@ -191,6 +191,8 @@ public:
 
 
     size_t index_size();
+
+    size_t count_node();
 };
 
 } // namespace geos::index::quadtree

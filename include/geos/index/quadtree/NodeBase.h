@@ -91,6 +91,7 @@ public:
     virtual void visit(const geom::Envelope* searchEnv, ItemVisitor& visitor);
 
     std::size_t traverse();
+    std::size_t traverse_nodes();
     /**
      * Removes a single item from this subtree.
      *
