@@ -136,7 +136,7 @@ public:
         return sizeof(geos::geom::Envelope) + sizeof(Node) + traverse();
     }
     std::size_t node_count(){
-        return traverse_nodes();
+        return 1 + traverse_nodes();
     }
 
 };

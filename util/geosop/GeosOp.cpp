@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     std::size_t size = quadtree1.index_size();
         std::size_t  num_nodes = quadtree1.count_node();
         std::cout << "quadtree with " << " " << path << " " <<" has " <<num_nodes << " nodes"
-        << "has index size" << size << std::endl;
+        << " has index size" << size << std::endl;
 
     }
 }
