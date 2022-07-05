@@ -135,6 +135,9 @@ public:
     std::size_t index_size(){
         return sizeof(geos::geom::Envelope) + sizeof(Node) + traverse();
     }
+    std::size_t node_count(){
+        return traverse_nodes();
+    }
 
 };
 

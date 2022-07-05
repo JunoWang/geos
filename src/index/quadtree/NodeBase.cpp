@@ -211,7 +211,7 @@ std::size_t NodeBase::traverse(){
         size_t num_of_nodes = 0;
         for(auto & subnode : subnodes){
             if(subnode != nullptr){
-               num_of_nodes ++;
+                num_of_nodes += subnode->node_count();
             }
         }
         return num_of_nodes;
